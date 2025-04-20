@@ -5,7 +5,7 @@ const llmService = require('./llmService');
 let mainWindow;
 
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow= new BrowserWindow({
     width: 1200,
     height: 800,
     webPreferences: {
@@ -15,7 +15,7 @@ function createWindow() {
       webviewTag: true
     }
   });
-  win.loadFile(path.join(__dirname, 'views', 'landing.html'));
+  mainWindow.loadFile(path.join(__dirname, 'views', 'landing.html'));
 }
 
 app.whenReady().then(createWindow);
@@ -32,6 +32,7 @@ ipcMain.handle('get-page-text', async () => {
       `document.querySelector('webview').executeJavaScript("document.body.innerText")`
     );
     console.log('Extracted page text length=', text.length);
+    console.log('Extracted page text:', text); // log first 100 chars
     return text;
   } catch (err) {
     console.error('Error extracting page text:', err);

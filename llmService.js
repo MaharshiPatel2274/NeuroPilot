@@ -1,5 +1,5 @@
 // llmService.js
-
+require('dotenv').config();
 const OpenAI = require('openai');
 const { getContext, pushContext } = require('./memoryStore');
 
@@ -34,9 +34,9 @@ exports.handleQuery = async (userId, query, mode) => {
 
   // 3. Call the Chat Completion API
   const response = await openai.chat.completions.create({
-    model: 'gpt-4',
+    model: 'gpt-3.5-turbo',
     messages,
-    temperature: 0.3
+    
   });
 
   const answer = response.choices[0].message.content.trim();
