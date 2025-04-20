@@ -1,126 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Nova/NeuroPilot</title>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
+  <meta charset="UTF-8" />
+  <title>Nova / NeuroPilot</title>
 
-        /* Top URL bar */
-        #controls {
-            flex: 0 0 40px;
-            padding: 5px;
-            background: #eee;
-            display: flex;
-            align-items: center;
-        }
-        #controls input {
-            flex: 1;
-            height: 28px;
-            padding: 0 8px;
-            font-size: 14px;
-        }
-        #controls button {
-            margin-left: 8px;
-            height: 32px;
-        }
+  <!--  ── STYLE  ─────────────────────────────────────────────────── -->
+  <style>
+    /* ─── Color palette ─── */
+    :root{
+      --bg-1:#0e1220;          /* deep navy   */
+      --bg-2:#161b2e;          /* card navy   */
+      --accent:#42a5ff;        /* neon blue   */
+      --accent-soft:#9cc9ff;   /* soft blue   */
+      --white:#f2f4f8;
+    }
 
-        /* The embedded browser view */
-        #webview {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-        }
+    /* ─── Reset + base ─── */
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,sans-serif}
+    body{
+      display:flex;flex-direction:column;height:100vh;
+      background:radial-gradient(800px at 20% 120%,#1c233d 0%,var(--bg-1) 50%);
+      color:var(--white);
+      overflow:hidden;
+    }
 
-        /* Summarize button */
-        #summarize-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: orange;
-            border: none;
-            font-size: 18px;
-            color: white;
-            cursor: pointer;
-            z-index: 9999;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
+    /* ─── Decorative glow rings ─── */
+    body::before,body::after{
+      content:'';position:absolute;z-index:-1;border-radius:50%;
+      filter:blur(90px);opacity:.55;animation:float 14s ease-in-out infinite;
+    }
+    body::before{width:400px;height:400px;background:#3b82f6;left:-120px;top:-80px;}
+    body::after {width:500px;height:500px;background:#9333ea;right:-140px;bottom:-120px;animation-delay:3s;}
 
-        /* Overlay backdrop */
-        #summarize-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9998;
-        }
+    @keyframes float{
+      0%{transform:translateY(0)}
+      50%{transform:translateY(-30px)}
+      100%{transform:translateY(0)}
+    }
 
-        /* Panel inside overlay */
-        #summarize-panel {
-            background: #fff;
-            padding: 20px;
-            width: 80vw;
-            max-width: 600px;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-        }
-        #summarize-panel h3 {
-            margin-top: 0;
-        }
-        #summarize-panel textarea {
-            width: 100%;
-            height: 150px;
-            margin-bottom: 10px;
-            resize: none;
-        }
-        #summarize-panel button {
-            padding: 6px 12px;
-            font-size: 14px;
-        }
-    </style>
+    /* ─── Top bar ─── */
+    #controls{
+      display:flex;align-items:center;gap:.6rem;
+      padding:.5rem .9rem;flex:0 0 54px;
+      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      background:rgba(22,27,46,.55);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    #url-input{
+      flex:1;height:36px;border:none;border-radius:8px;
+      padding:0 .9rem;font-size:14px;background:rgba(255,255,255,.05);
+      color:var(--white);outline:none;
+    }
+    #url-input::placeholder{color:#8b94b5}
+    #url-input:focus{box-shadow:0 0 0 2px var(--accent)}
+
+    #go-button{
+      height:36px;padding:0 1.2rem;border:none;border-radius:8px;
+      background:var(--accent);color:#fff;font-weight:600;cursor:pointer;
+      transition:filter .2s;
+    }
+    #go-button:hover{filter:brightness(1.12)}
+
+    /* ─── Webview ─── */
+    #webview{flex:1;width:100%;height:100%;border:none;}
+
+    /* ─── Floating Action Button ─── */
+    #summarize-button{
+      position:fixed;bottom:22px;right:22px;
+      width:64px;height:64px;border-radius:50%;border:none;
+      background:linear-gradient(145deg,#ff9d4c,#ff6a26);
+      color:#fff;font:700 26px/1 Inter;cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:900;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .2s;
+    }
+    #summarize-button:hover{transform:scale(1.08)}
+
+    /* ─── Overlay ─── */
+    #summarize-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);
+      backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:800;
+    }
+    #summarize-panel{
+      width:90%;max-width:680px;background:var(--bg-2);border-radius:14px;
+      box-shadow:0 8px 24px rgba(0,0,0,.6);padding:28px 32px;display:flex;flex-direction:column;gap:14px;
+    }
+    #summarize-panel h3{font-size:1.45rem;font-weight:600;color:var(--accent-soft)}
+    #summarize-panel textarea{
+      width:100%;height:220px;border:1px solid rgba(255,255,255,.1);border-radius:10px;
+      resize:none;padding:10px;background:rgba(255,255,255,.04);color:var(--white);
+      font-family:inherit;font-size:.92rem;
+    }
+    #summarize-panel button{
+      padding:8px 18px;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;
+    }
+    #do-summarize{background:var(--accent);color:#fff}
+    #close-overlay{margin-left:10px;background:rgba(255,255,255,.12);color:var(--white)}
+    #close-overlay:hover{background:rgba(255,255,255,.22)}
+
+    /* ─── Small screens ─── */
+    @media(max-width:640px){
+      #controls{gap:.4rem;padding:.4rem .6rem}
+      #go-button{padding:0 .8rem}
+    }
+  </style>
 </head>
+
 <body>
-<div id="controls">
+  <!-- Top bar -->
+  <div id="controls">
     <input id="url-input" type="text" placeholder="https://example.com" />
     <button id="go-button">Go</button>
-</div>
+  </div>
 
-<webview
-        id="webview"
-        src="https://www.example.com"
-        preload="preload.js"
-></webview>
+  <!-- Browser view -->
+  <webview id="webview" src="https://www.example.com" preload="preload.js"></webview>
 
-<button id="summarize-button" title="Summarize">S</button>
+  <!-- Summarize FAB -->
+  <button id="summarize-button" title="Summarize">S</button>
 
-<div id="summarize-overlay">
+  <!-- Summary overlay -->
+  <div id="summarize-overlay">
     <div id="summarize-panel">
-        <h3>Summarize Article</h3>
-        <textarea
-                id="summary-result"
-                readonly
-                placeholder="Your summary will appear here…"
-        ></textarea>
-        <div>
-            <button id="do-summarize">Summarize</button>
-            <button id="close-overlay">Close</button>
-        </div>
+      <h3>Summarize Article</h3>
+      <textarea id="summary-result" readonly placeholder="Your summary will appear here…"></textarea>
+      <div>
+        <button id="do-summarize">Summarize</button>
+        <button id="close-overlay">Close</button>
+      </div>
     </div>
-</div>
+  </div>
 
-<script src="renderer.js"></script>
+  <script src="renderer.js"></script>
 </body>
 </html>
