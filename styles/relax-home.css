@@ -22,7 +22,7 @@ body {
     overflow: hidden;
 }
 
-/* full‐screen blurred background */
+/* full‑screen blurred background */
 .bg-blur {
     position: absolute;
     top: 0; left: 0;
@@ -119,4 +119,66 @@ body {
 .category-card h3 {
     margin-bottom: 0.5rem;
     color: var(--green-accent);
+}
+
+/* ------------ Weather Widget Styles ------------ */
+.weather-card {
+    /* dark-blue gradient background */
+    background: linear-gradient(
+            to bottom,
+            #001d3d 0%,
+            #003566 100%
+    );
+    /* tiny outer padding to separate content from outline */
+    padding: 0.25rem;
+    /* thin white outline */
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* inner container now gets its own padding */
+.weather-card .weather-widget {
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.weather-widget .current {
+    display: flex;
+    align-items: center;
+}
+
+.weather-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+}
+
+.weather-widget .temp {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.forecast {
+    display: flex;
+    gap: 1rem;
+}
+
+.hour {
+    text-align: center;
+}
+
+.hour-label {
+    display: block;
+    font-size: 0.85rem;
+}
+
+.hour-temp {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
 }
