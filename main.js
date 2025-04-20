@@ -5,20 +5,18 @@ const llmService = require('./llmService');
 let mainWindow;
 
 function createWindow() {
-  console.log('Creating main window');
-  mainWindow = new BrowserWindow({
+  const win = new BrowserWindow({
     width: 1200,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+
+        preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
       webviewTag: true
     }
   });
-
-  mainWindow.loadFile('index.html');
-  mainWindow.webContents.openDevTools();
+    win.loadFile('landing.html');
 }
 
 app.whenReady().then(createWindow);
