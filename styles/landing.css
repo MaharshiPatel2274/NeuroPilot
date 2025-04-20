@@ -1,11 +1,10 @@
-/* landing.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
 :root {
-  --bg-dark:   #000;
-  --neon:      #00ff6a;
-  --text-light:#e6e6e6;
-  --panel-bg:  rgba(0,0,0,0.6);
+  --bg-dark:    #000;
+  --neon:       #00ff6a;
+  --text-light: #e6e6e6;
+  --panel-bg:   rgba(0,0,0,0.6);
 }
 
 * {
@@ -43,8 +42,12 @@ body {
   width: 50%;
   height: 3px;
   margin: 0.5rem auto;
-  background: linear-gradient(90deg,
-    transparent 0%, var(--neon) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--neon) 50%,
+    transparent 100%
+  );
   background-size: 200% 100%;
   animation: underline-slide 3s ease-in-out infinite;
 }
@@ -60,7 +63,7 @@ body {
   max-width: 1200px;
 }
 
-/* PANEL (no border) */
+/* ZONE PANELS */
 .zone {
   flex: 1;
   background: var(--panel-bg);
@@ -77,15 +80,23 @@ body {
   box-shadow: 0 0 30px rgba(0,255,106,0.4);
 }
 
-/* PANEL HEADINGS */
+/* ZONE HEADINGS */
 .zone h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-weight: 600;
   color: var(--neon);
   text-shadow: 0 0 6px var(--neon);
   margin-bottom: 1rem;
 }
+.zone-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  filter: brightness(0) invert(1);
+}
 
-/* LIST */
+/* APP LIST */
 .apps-list {
   flex: 1;
   list-style: none;
@@ -100,7 +111,12 @@ body {
   background: var(--neon);
   border-radius: 3px;
 }
+
+/* APP CARDS */
 .app-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   padding: 0.75rem;
   margin-bottom: 0.5rem;
   background: rgba(0,0,0,0.4);
@@ -111,6 +127,11 @@ body {
 .app-card:hover {
   background: rgba(0,0,0,0.7);
   box-shadow: 0 0 10px var(--neon);
+}
+.app-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  filter: brightness(0) invert(1);
 }
 
 /* BUTTONS */
@@ -135,7 +156,7 @@ body {
   box-shadow: 0 0 20px var(--neon);
 }
 
-/* CONFIRM CONTAINER */
+/* CONFIRM BUTTON */
 .confirm-container {
   margin: 2rem 0;
 }
@@ -143,12 +164,9 @@ body {
 /* MODAL */
 .modal.hidden { display: none; }
 .modal {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: rgba(0,0,0,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   z-index: 10;
 }
 .modal-content {
@@ -156,14 +174,21 @@ body {
   border: 2px solid var(--neon);
   border-radius: 8px;
   padding: 2rem;
-  width: 300px;
+  width: 320px;
   text-align: center;
   box-shadow: 0 0 20px var(--neon);
 }
 .modal-content h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--neon);
   text-shadow: 0 0 6px var(--neon);
   margin-bottom: 1rem;
+}
+.modal-icon {
+  width: 1.4rem; height: 1.4rem;
+  filter: brightness(0) invert(1);
 }
 .modal-content input {
   width: 100%;
