@@ -10,5 +10,10 @@ contextBridge.exposeInMainWorld('novaAPI', {
     const limitedText = text.slice(0, 10000); // Limit to 100 characters
     console.log('Preload: summarizePage called, text length=', limitedText.length);
     return ipcRenderer.invoke('summarize-text', limitedText);
+  },
+  getWorkAdvice: (healthData) => {
+    console.log('Preload: getWorkAdvice called with:', healthData);
+    return ipcRenderer.invoke('get-work-advice', healthData);
   }
+
 });
