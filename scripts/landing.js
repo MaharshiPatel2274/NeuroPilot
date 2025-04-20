@@ -37,6 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmBtn = document.getElementById('confirm-btn');
     confirmBtn.addEventListener('click', () => {
         // Navigate to your mode‐select page
-        window.location.href = 'mode-selection.html';
+        window.location.href = '../views/mode-selection.html';
     });
 });

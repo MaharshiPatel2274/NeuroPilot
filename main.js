@@ -16,7 +16,7 @@ function createWindow() {
       webviewTag: true
     }
   });
-    win.loadFile('landing.html');
+  win.loadFile(path.join(__dirname, 'views', 'landing.html'));
 }
 
 app.whenReady().then(createWindow);
