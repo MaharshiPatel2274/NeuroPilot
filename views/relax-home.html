@@ -7,7 +7,10 @@
 
     <!-- Tailwind (forms + typography plugins) -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+            rel="stylesheet"
+    />
 
     <!-- Your custom blur + color overrides -->
     <link rel="stylesheet" href="../styles/relax-home.css" />
@@ -16,9 +19,11 @@
 
 <!-- full‑screen blurred BG -->
 <div class="absolute inset-0 -z-10">
-    <img src="../assets/landingbg.jpg"
-         class="w-full h-full object-cover filter blur-2xl brightness-50 select-none"
-         alt="background" />
+    <img
+            src="../assets/landingbg.jpg"
+            class="w-full h-full object-cover filter blur-2xl brightness-50 select-none"
+            alt="background"
+    />
 </div>
 
 <div class="container mx-auto p-6 space-y-8">
@@ -30,31 +35,84 @@
         </h1>
     </header>
 
+    <!-- search bar -->
+    <div class="search-bar-container">
+        <input
+                id="search-input"
+                type="text"
+                placeholder="Search the web privately"
+        />
+        <button id="search-btn">🔍</button>
+    </div>
+
     <!-- stats -->
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg shadow">
-            <p id="blocked-ads" class="text-4xl font-semibold text-green-400">0</p>
+            <p id="blocked-ads" class="text-4xl font-semibold text-green-400">
+                87,682
+            </p>
             <p class="mt-2 text-sm text-gray-200">Trackers &amp; Ads Blocked</p>
         </div>
         <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg shadow">
-            <p id="bandwidth-saved" class="text-4xl font-semibold text-green-400">0 MB</p>
+            <p
+                    id="bandwidth-saved"
+                    class="text-4xl font-semibold text-green-400"
+            >
+                379.3 MB
+            </p>
             <p class="mt-2 text-sm text-gray-200">Bandwidth Saved</p>
         </div>
         <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg shadow">
-            <p id="time-saved" class="text-4xl font-semibold text-green-400">0.0 h</p>
+            <p id="time-saved" class="text-4xl font-semibold text-green-400">
+                1.2 h
+            </p>
             <p class="mt-2 text-sm text-gray-200">Time Saved</p>
         </div>
     </section>
 
-    <!-- category buttons -->
-    <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-20">
-        <div class="category-card" id="entertainment">
-            <h3>Entertainment</h3>
-        </div>
-        <div class="category-card" id="communication">
-            <h3>Communication</h3>
+    <!-- widgets row: youtube (2 cols), weather (1), communication (1) -->
+    <section class="grid grid-cols-1 sm:grid-cols-4 gap-6 pb-20">
+
+        <!-- YouTube widget -->
+        <div
+                class="category-card youtube-card sm:col-span-2"
+                id="youtube"
+        >
+            <div class="youtube-widget">
+                <div class="youtube-widget-title">
+                    <a href="https://www.youtube.com" class="icon-link">
+                        <img src="../assets/yt.svg" alt="YouTube" class="icon" />
+                    </a>
+                    <span class="widget-label"
+                    >YouTube Recommendations</span
+                    >
+                </div>
+                <div class="youtube-content">
+                    <a
+                            href="https://www.youtube.com/watch?v=GLC4HuOBH9o"
+                            class="thumbnail-link"
+                    >
+                        <img
+                                src="../assets/ytthumbnail.jpeg"
+                                alt="Recommended Video"
+                                class="thumbnail"
+                        />
+                    </a>
+                    <div class="video-info">
+                        <a
+                                href="https://www.youtube.com/watch?v=GLC4HuOBH9o"
+                                class="video-title"
+                        >
+                            Possibly the best guitar solo I’ve heard in 12 years …
+                        </a>
+                        <div class="video-channel">Paul Spink</div>
+                        <div class="video-meta">3M views • 5 years ago</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <!-- Weather widget -->
         <div class="category-card weather-card" id="weather">
             <div class="weather-widget">
                 <div class="current">
@@ -81,8 +139,12 @@
                 </div>
             </div>
         </div>
-    </section>
 
+        <!-- Communication placeholder -->
+        <div class="category-card" id="communication">
+            <h3>Communication</h3>
+        </div>
+    </section>
 </div>
 
 <script src="../scripts/relax-home.js"></script>
