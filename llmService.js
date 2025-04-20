@@ -34,7 +34,7 @@ exports.handleQuery = async (userId, query, mode) => {
 
   // 3. Call the Chat Completion API
   const response = await openai.chat.completions.create({
-    model: 'gpt-3.5',
+    model: 'gpt-3.5-turbo',
     messages,
     
   });
