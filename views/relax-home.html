@@ -28,12 +28,24 @@
 
 <div class="container mx-auto p-6 space-y-8">
 
-    <!-- header -->
-    <header class="flex justify-between items-center">
-        <h1 class="text-3xl font-bold flex items-center gap-2">
-            🛋️ Relax Mode
-        </h1>
-    </header>
+    <!-- mode-switch pill -->
+    <div class="mode-switch">
+        <div class="mode-pill">
+            <img src="../assets/relax.svg" alt="Relax" class="mode-icon" />
+            <span class="mode-text">Relax</span>
+        </div>
+        <div class="mode-dropdown">
+            <div class="mode-item">
+                <img src="../assets/relax.svg" alt="Relax" class="mode-icon" />
+                <span class="mode-text">Relax</span>
+            </div>
+            <div class="divider"></div>
+            <div class="mode-item" id="switch-to-work">
+                <img src="../assets/work.svg" alt="Work" class="mode-icon" />
+                <span class="mode-text">Work</span>
+            </div>
+        </div>
+    </div>
 
     <!-- search bar -->
     <div class="search-bar-container">
@@ -54,10 +66,7 @@
             <p class="mt-2 text-sm text-gray-200">Trackers &amp; Ads Blocked</p>
         </div>
         <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg shadow">
-            <p
-                    id="bandwidth-saved"
-                    class="text-4xl font-semibold text-green-400"
-            >
+            <p id="bandwidth-saved" class="text-4xl font-semibold text-green-400">
                 379.3 MB
             </p>
             <p class="mt-2 text-sm text-gray-200">Bandwidth Saved</p>
@@ -74,18 +83,13 @@
     <section class="grid grid-cols-1 sm:grid-cols-4 gap-6 pb-20">
 
         <!-- YouTube widget -->
-        <div
-                class="category-card youtube-card sm:col-span-2"
-                id="youtube"
-        >
+        <div class="category-card youtube-card sm:col-span-2" id="youtube">
             <div class="youtube-widget">
                 <div class="youtube-widget-title">
                     <a href="https://www.youtube.com" class="icon-link">
                         <img src="../assets/yt.svg" alt="YouTube" class="icon" />
                     </a>
-                    <span class="widget-label"
-                    >YouTube Recommendations</span
-                    >
+                    <span class="widget-label">YouTube Recommendations</span>
                 </div>
                 <div class="youtube-content">
                     <a
@@ -103,10 +107,10 @@
                                 href="https://www.youtube.com/watch?v=GLC4HuOBH9o"
                                 class="video-title"
                         >
-                            Porsche 911 Dakar: Off-Road Beast or Luxury ...
+                            Porsche 911 Dakar: Off‑Road Beast or Luxury …
                         </a>
                         <div class="video-channel">Paul Spink</div>
-                        <div class="video-meta">3M views • 5 years ago</div>
+                        <div class="video-meta">3M views • 5 years ago</div>
                     </div>
                 </div>
             </div>
@@ -140,10 +144,6 @@
             </div>
         </div>
 
-        <!-- Communication placeholder -->
-<!--        <div class="category-card" id="communication">-->
-<!--            <h3>Communication</h3>-->
-<!--        </div>-->
     </section>
 </div>
 
