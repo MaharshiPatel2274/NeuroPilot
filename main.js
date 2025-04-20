@@ -52,3 +52,33 @@ ipcMain.handle('summarize-text', async (event, text) => {
     return 'Error generating summary';
   }
 });
+// IPC: provide wellness-based work advice
+ipcMain.handle('get-work-advice', async (event, healthData) => {
+  const { bp, sleep, steps } = healthData;
+
+  console.log(`Generating work advice for BP: ${bp}, Sleep: ${sleep}, Steps: ${steps}`);
+
+  const prompt = `
+You are a helpful wellness assistant.
+The user provided the following data:
+- Blood Pressure: ${bp}
+- Sleep Duration: ${sleep} hours
+- Step Count: ${steps}
+
+The user-defined health standards are:
+- Ideal BP: 90 to 130
+- Minimum Sleep: 7 hours
+- Minimum Steps: 5000
+
+Based on these inputs and standards, provide a 2-line personalized message that advises whether the user should keep working or take a break.
+`;
+
+  try {
+    const advice = await llmService.handleQuery('demo-user', prompt, 'summarize');
+    console.log('LLM work advice:', advice);
+    return advice;
+  } catch (err) {
+    console.error('Error generating work advice:', err);
+    return 'Unable to generate advice right now.';
+  }
+});
