@@ -166,3 +166,46 @@ body {
     width:80px; font-weight:600; color:#fff; margin-right:1rem;
 }
 .event-desc { flex:1; color:rgba(255,255,255,0.85); }
+/* ------------ Health Snapshot & Advice Widget ------------ */
+.health-card {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    padding: 0.75rem;
+    background: var(--card-bg);
+}
+
+.health-widget .widget-label {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.health-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.health-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 0.5rem;
+    background: var(--green-accent);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.health-output {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    color: rgba(255,255,255,0.85);
+    min-height: 2em; /* reserve space */
+}
