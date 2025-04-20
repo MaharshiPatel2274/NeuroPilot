@@ -12,7 +12,7 @@
             rel="stylesheet"
     />
 
-    <!-- Your custom blur + color overrides -->
+    <!-- Custom blur + color overrides -->
     <link rel="stylesheet" href="../styles/relax-home.css" />
 </head>
 <body class="h-full bg-np-dark text-white font-[Poppins] overflow-x-hidden">
@@ -47,6 +47,14 @@
         </div>
     </div>
 
+    <!-- greeting -->
+    <div class="greeting text-center mb-4">
+        <h2 class="text-4xl font-bold">
+            <span class="text-white">Good Morning,</span>
+            <span class="text-gray-400"> User</span>
+        </h2>
+    </div>
+
     <!-- search bar -->
     <div class="search-bar-container">
         <input
@@ -54,95 +62,147 @@
                 type="text"
                 placeholder="Search the web privately"
         />
-        <button id="search-btn">🔍</button>
+        <button id="search-btn">
+            <img src="../assets/go.svg" alt="Search" class="w-5 h-5" />
+        </button>
     </div>
 
     <!-- stats -->
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg shadow">
-            <p id="blocked-ads" class="text-4xl font-semibold text-green-400">
-                87,682
-            </p>
-            <p class="mt-2 text-sm text-gray-200">Trackers &amp; Ads Blocked</p>
+            <p id="blocked-ads" class="text-4xl font-semibold text-green-400">87,682</p>
+            <p class="mt-2 text-sm text-gray-200">Trackers & Ads Blocked</p>
         </div>
         <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg shadow">
-            <p id="bandwidth-saved" class="text-4xl font-semibold text-green-400">
-                379.3 MB
-            </p>
-            <p class="mt-2 text-sm text-gray-200">Bandwidth Saved</p>
+            <p id="bandwidth-saved" class="text-4xl font-semibold text-green-400">379.3 MB</p>
+            <p class="mt-2 text-sm text-gray-200">Bandwidth Saved</p>
         </div>
         <div class="bg-black/40 backdrop-blur-md p-6 rounded-lg shadow">
-            <p id="time-saved" class="text-4xl font-semibold text-green-400">
-                1.2 h
-            </p>
-            <p class="mt-2 text-sm text-gray-200">Time Saved</p>
+            <p id="time-saved" class="text-4xl font-semibold text-green-400">1.2 h</p>
+            <p class="mt-2 text-sm text-gray-200">Time Saved</p>
         </div>
     </section>
 
-    <!-- widgets row: youtube (2 cols), weather (1), communication (1) -->
-    <section class="grid grid-cols-1 sm:grid-cols-4 gap-6 pb-20">
+    <!-- widgets: 3‑column grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-6 pb-20 items-start">
 
-        <!-- YouTube widget -->
-        <div class="category-card youtube-card sm:col-span-2" id="youtube">
+        <!-- Col 1, Row 1: YouTube -->
+        <div class="category-card youtube-card" id="youtube">
             <div class="youtube-widget">
                 <div class="youtube-widget-title">
-                    <a href="https://www.youtube.com" class="icon-link">
-                        <img src="../assets/yt.svg" alt="YouTube" class="icon" />
-                    </a>
+                    <img src="../assets/yt.svg" alt="YouTube" class="icon" />
                     <span class="widget-label">YouTube Recommendations</span>
                 </div>
                 <div class="youtube-content">
-                    <a
-                            href="https://www.youtube.com/watch?v=GLC4HuOBH9o"
-                            class="thumbnail-link"
-                    >
-                        <img
-                                src="../assets/ytthumbnail.jpeg"
-                                alt="Recommended Video"
-                                class="thumbnail"
-                        />
+                    <a href="https://www.youtube.com/watch?v=GLC4HuOBH9o" class="thumbnail-link">
+                        <img src="../assets/ytthumbnail.jpeg" alt="Video" class="thumbnail"/>
                     </a>
                     <div class="video-info">
-                        <a
-                                href="https://www.youtube.com/watch?v=GLC4HuOBH9o"
-                                class="video-title"
-                        >
+                        <a href="https://www.youtube.com/watch?v=GLC4HuOBH9o" class="video-title">
                             Porsche 911 Dakar: Off‑Road Beast or Luxury …
                         </a>
-                        <div class="video-channel">Paul Spink</div>
-                        <div class="video-meta">3M views • 5 years ago</div>
+                        <div class="video-channel">Paul Spink</div>
+                        <div class="video-meta">3M views • 5 years ago</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Weather widget -->
-        <div class="category-card weather-card" id="weather">
-            <div class="weather-widget">
-                <div class="current">
-                    <img
-                            src="../assets/clearNight.svg"
-                            alt="Clear Night"
-                            class="weather-icon"
-                    />
-                    <div class="temp">65°F</div>
+        <!-- Col 2, Row 1: Weather -->
+        <div class="weather-center text-center px-4">
+            <img src="../assets/sun.svg" alt="Sunny" class="mx-auto w-24 h-24 mb-2"/>
+            <div class="text-xl text-gray-300">Tempe, AZ</div>
+            <div class="text-5xl font-bold text-white mt-1">72°F</div>
+            <div class="flex justify-center gap-6 text-gray-300 mt-4">
+                <div class="hour">
+                    <div class="hour-label">10 AM</div>
+                    <div class="hour-temp">72°F</div>
                 </div>
-                <div class="forecast">
-                    <div class="hour">
-                        <span class="hour-label">12 AM</span>
-                        <span class="hour-temp">64°F</span>
-                    </div>
-                    <div class="hour">
-                        <span class="hour-label">1 AM</span>
-                        <span class="hour-temp">63°F</span>
-                    </div>
-                    <div class="hour">
-                        <span class="hour-label">2 AM</span>
-                        <span class="hour-temp">62°F</span>
-                    </div>
+                <div class="hour">
+                    <div class="hour-label">11 AM</div>
+                    <div class="hour-temp">74°F</div>
+                </div>
+                <div class="hour">
+                    <div class="hour-label">12 PM</div>
+                    <div class="hour-temp">78°F</div>
+                </div>
+                <div class="hour">
+                    <div class="hour-label">1 PM</div>
+                    <div class="hour-temp">81°F</div>
+                </div>
+                <div class="hour">
+                    <div class="hour-label">2 PM</div>
+                    <div class="hour-temp">84°F</div>
                 </div>
             </div>
         </div>
+
+        <!-- Col 3, Row 1: WhatsApp -->
+        <div class="category-card whatsapp-card" id="whatsapp">
+            <div class="whatsapp-widget">
+                <div class="whatsapp-widget-title">
+                    <img src="../assets/whatsapp.svg" alt="WhatsApp" class="icon" />
+                    <span class="widget-label">WhatsApp Follow‑ups</span>
+                </div>
+                <div class="whatsapp-content">
+                    <img src="../assets/man.jpg" alt="Profile" class="profile-pic" />
+                    <p class="message-preview">Reminder: Text dad back about the rent.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Col 1, Row 2: Upcoming Events -->
+        <div class="category-card events-card sm:col-start-1 sm:col-span-1" id="events">
+            <div class="events-widget">
+                <div class="events-widget-title">
+                    <img src="../assets/calendar.svg" alt="Events" class="icon events-icon" />
+                    <span class="widget-label">Upcoming Events</span>
+                </div>
+                <ul class="events-list">
+                    <li>
+                        <div class="event-date">
+                            <span class="event-month">Apr</span>
+                            <span class="event-day">28</span>
+                        </div>
+                        <div class="event-time">3:00 PM</div>
+                        <div class="event-desc">Team sync‑up meeting</div>
+                    </li>
+                    <li>
+                        <div class="event-date">
+                            <span class="event-month">May</span>
+                            <span class="event-day">01</span>
+                        </div>
+                        <div class="event-time">9:30 AM</div>
+                        <div class="event-desc">Doctor appointment</div>
+                    </li>
+                    <li>
+                        <div class="event-date">
+                            <span class="event-month">May</span>
+                            <span class="event-day">03</span>
+                        </div>
+                        <div class="event-time">7:00 PM</div>
+                        <div class="event-desc">Call with family</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Col 2, Row 2: News -->
+        <div class="category-card news-card sm:col-start-2 sm:col-span-1" id="news">
+            <div class="news-widget">
+                <div class="news-widget-title">
+                    <img src="../assets/news.svg" alt="News" class="icon news-icon" />
+                    <span class="widget-label">News Headlines</span>
+                </div>
+                <ul class="news-list">
+                    <li>🌐 AI model passes doctor‑level exam</li>
+                    <li>⚡️ New browser plugin blocks 99% of trackers</li>
+                    <li>📈 Market rallies on tech earnings</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- (Col 3, Row 2 is intentionally left blank) -->
 
     </section>
 </div>
