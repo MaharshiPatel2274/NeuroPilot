@@ -4,60 +4,67 @@
   <meta charset="UTF-8" />
   <title>NeuroPilot</title>
   <link rel="stylesheet" href="../styles/landing.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pTU5pXl3Uiw+fb/1bwtfKszmPFV6I1vE7v2VJYqz+vxurtTg+TUVXvE1rL+l5cdwEZeG6QDh7vM6W2Y2XvE+Xg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 </head>
 <body>
-<!-- Blurred background -->
-<div class="bg-blur"></div>
-
-<!-- Header -->
-<div class="landing-header">
-  <h1>Sort services according to their category</h1>
-  <p class="subtitle">(You can edit these at any time)</p>
-</div>
-
-<!-- Two-column selector -->
-<div class="container">
-  <div class="zone relax">
-    <h2>🛋️ Relax</h2>
-    <ul class="apps-list" id="relax-list">
-      <li class="app-card">YouTube</li>
-      <li class="app-card">WhatsApp</li>
-      <li class="app-card">Reddit</li>
-      <li class="app-card">Netflix</li>
-      <li class="app-card">ChatGPT</li>
-    </ul>
-    <button class="add-btn" data-zone="relax">+ Add App</button>
+  <div class="landing-header">
+    <h1>Sort services according to their category</h1>
+    <p class="subtitle">(You can edit these at any time)</p>
+    <div class="underline"></div>
   </div>
 
-  <div class="zone work">
-    <h2>💼 Work</h2>
-    <ul class="apps-list" id="work-list">
-      <li class="app-card">Email</li>
-      <li class="app-card">Calendar</li>
-      <li class="app-card">Meetings</li>
-      <li class="app-card">Reminders</li>
-    </ul>
-    <button class="add-btn" data-zone="work">+ Add App</button>
-  </div>
-</div>
+  <div class="container">
+    <div class="zone relax">
+      <h2><i class="fas fa-couch"></i> Relax</h2>
+      <ul class="apps-list" id="relax-list">
+        <li class="app-card">YouTube</li>
+        <li class="app-card">WhatsApp</li>
+        <li class="app-card">Reddit</li>
+        <li class="app-card">Netflix</li>
+        <li class="app-card">ChatGPT</li>
+      </ul>
+      <button class="add-btn" data-zone="relax">
+        <i class="fas fa-plus"></i> Add App
+      </button>
+    </div>
 
-<!-- Confirm button -->
-<div class="confirm-container">
-  <button id="confirm-btn">Confirm & Continue</button>
-</div>
-
-<!-- Add‑App Modal -->
-<div id="app-modal" class="modal hidden">
-  <div class="modal-content">
-    <h3>Add a Service to <span id="modal-zone-name"></span></h3>
-    <input type="text" id="new-app-name" placeholder="e.g. Spotify" />
-    <div class="modal-actions">
-      <button id="save-app">Save</button>
-      <button id="cancel-app">Cancel</button>
+    <div class="zone work">
+      <h2><i class="fas fa-briefcase"></i> Work</h2>
+      <ul class="apps-list" id="work-list">
+        <li class="app-card">Email</li>
+        <li class="app-card">Calendar</li>
+        <li class="app-card">Meetings</li>
+        <li class="app-card">Reminders</li>
+      </ul>
+      <button class="add-btn" data-zone="work">
+        <i class="fas fa-plus"></i> Add App
+      </button>
     </div>
   </div>
-</div>
 
-<script src="../scripts/landing.js"></script>
+  <div class="confirm-container">
+    <button id="confirm-btn">
+      <i class="fas fa-check"></i> Confirm &amp; Continue
+    </button>
+  </div>
+
+  <div id="app-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Add a Service to <span id="modal-zone-name"></span></h3>
+      <input type="text" id="new-app-name" placeholder="e.g. Spotify" />
+      <div class="modal-actions">
+        <button id="save-app">Save</button>
+        <button id="cancel-app">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/landing.js"></script>
 </body>
 </html>
