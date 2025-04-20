@@ -1,126 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Nova/NeuroPilot</title>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-
-        /* Top URL bar */
-        #controls {
-            flex: 0 0 40px;
-            padding: 5px;
-            background: #eee;
-            display: flex;
-            align-items: center;
-        }
-        #controls input {
-            flex: 1;
-            height: 28px;
-            padding: 0 8px;
-            font-size: 14px;
-        }
-        #controls button {
-            margin-left: 8px;
-            height: 32px;
-        }
-
-        /* The embedded browser view */
-        #webview {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Summarize button */
-        #summarize-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: orange;
-            border: none;
-            font-size: 18px;
-            color: white;
-            cursor: pointer;
-            z-index: 9999;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Overlay backdrop */
-        #summarize-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9998;
-        }
-
-        /* Panel inside overlay */
-        #summarize-panel {
-            background: #fff;
-            padding: 20px;
-            width: 80vw;
-            max-width: 600px;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-        }
-        #summarize-panel h3 {
-            margin-top: 0;
-        }
-        #summarize-panel textarea {
-            width: 100%;
-            height: 150px;
-            margin-bottom: 10px;
-            resize: none;
-        }
-        #summarize-panel button {
-            padding: 6px 12px;
-            font-size: 14px;
-        }
-    </style>
+    <title>NeuroPilot</title>
+    <link rel="stylesheet" href="relax-home.css" />
 </head>
 <body>
-<div id="controls">
-    <input id="url-input" type="text" placeholder="https://example.com" />
-    <button id="go-button">Go</button>
+<!-- blurred background -->
+<div class="bg-blur"></div>
+
+<!-- search bar -->
+<div class="search-bar-container">
+    <input id="search-input" type="text" placeholder="Search the web privately" />
+    <button id="search-btn">🔍</button>
 </div>
 
-<webview
-        id="webview"
-        src="https://www.example.com"
-        preload="preload.js"
-></webview>
-
-<button id="summarize-button" title="Summarize">S</button>
-
-<div id="summarize-overlay">
-    <div id="summarize-panel">
-        <h3>Summarize Article</h3>
-        <textarea
-                id="summary-result"
-                readonly
-                placeholder="Your summary will appear here…"
-        ></textarea>
-        <div>
-            <button id="do-summarize">Summarize</button>
-            <button id="close-overlay">Close</button>
-        </div>
+<!-- trackers & ads widget -->
+<div class="stats-widget">
+    <div class="stat">
+        <div class="stat-number" id="blocked-ads">0</div>
+        <div class="stat-label">Trackers &amp; Ads Blocked</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number" id="bandwidth-saved">0 MB</div>
+        <div class="stat-label">Bandwidth Saved</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number" id="time-saved">0.0h</div>
+        <div class="stat-label">Time Saved</div>
     </div>
 </div>
 
-<script src="renderer.js"></script>
+<!-- category widgets -->
+<div id="categories">
+    <div class="category-card" id="entertainment">
+        <h3>Entertainment</h3>
+        <!-- later: YouTube & show recs -->
+    </div>
+    <div class="category-card" id="communication">
+        <h3>Communication</h3>
+        <!-- later: WhatsApp, chat recs -->
+    </div>
+    <div class="category-card" id="weather">
+        <h3>Weather</h3>
+        <!-- later: weather widget -->
+    </div>
+</div>
+
+<script src="relax-home.js"></script>
 </body>
 </html>
