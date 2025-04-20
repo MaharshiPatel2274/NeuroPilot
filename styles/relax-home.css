@@ -222,3 +222,61 @@ body {
 .hour { display:flex; flex-direction:column; align-items:center; }
 .hour-label { font-size:0.85rem; margin-bottom:0.25rem; line-height:1; }
 .hour-temp { font-size:0.9rem; line-height:1; }
+
+.greeting h2 {
+    line-height: 1.2;
+}
+
+/* optional responsive sizing */
+@media (min-width: 640px) {
+    .greeting h2 {
+        font-size: 2.5rem; /* adjust as you like */
+    }
+}
+
+/* ------------ WhatsApp Follow‑ups Widget Styles ------------ */
+.whatsapp-card {
+    background: #fff;
+    padding: 0.25rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.whatsapp-widget {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+}
+
+.whatsapp-widget-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.whatsapp-widget-title .icon {
+    width: 24px;
+    height: 24px;
+}
+
+.whatsapp-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-preview {
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
