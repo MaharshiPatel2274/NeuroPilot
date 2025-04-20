@@ -2,124 +2,213 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Nova / NeuroPilot</title>
-
-  <!--  ── STYLE  ─────────────────────────────────────────────────── -->
+  <title>Nova / NeuroPilot – Work Mode</title>
   <style>
-    /* ─── Color palette ─── */
-    :root{
-      --bg-1:#0e1220;          /* deep navy   */
-      --bg-2:#161b2e;          /* card navy   */
-      --accent:#42a5ff;        /* neon blue   */
-      --accent-soft:#9cc9ff;   /* soft blue   */
-      --white:#f2f4f8;
+    :root {
+      --bg-dark:    #0e1220;
+      --bg-panel:   rgba(22,27,46,0.75);
+      --accent:     #42a5ff;
+      --accent-alt: #00ffd5;
+      --text:       #f2f4f8;
+      --glass:      rgba(255,255,255,0.05);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin:0; padding:0;
+      width:100%; height:100%;
+      background:var(--bg-dark);
+      color:var(--text);
+      font-family:'Inter',system-ui,sans-serif;
+      overflow:hidden;
+      position:relative;
+      display:flex; flex-direction:column;
     }
 
-    /* ─── Reset + base ─── */
-    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,sans-serif}
-    body{
-      display:flex;flex-direction:column;height:100vh;
-      background:radial-gradient(800px at 20% 120%,#1c233d 0%,var(--bg-1) 50%);
-      color:var(--white);
+    /* Glow rings */
+    body::before, body::after {
+      content:''; position:absolute; z-index:-2;
+      width:500px; height:500px; border-radius:50%;
+      filter:blur(120px); opacity:0.5;
+      animation:float 18s ease-in-out infinite;
+    }
+    body::before {
+      background: var(--accent);
+      top:-150px; left:-200px;
+    }
+    body::after {
+      background: var(--accent-alt);
+      bottom:-150px; right:-200px;
+      animation-duration:16s;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0) }
+      50%     { transform: translateY(-40px) }
+    }
+
+    /* Top bar */
+    #controls {
+      display:flex; align-items:center; gap:.6rem;
+      padding:.6rem 1rem; height:60px;
+      backdrop-filter: blur(12px);
+      background: rgba(22,27,46,0.6);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0 8px var(--accent), 0 0 20px rgba(0,0,0,0.3);
+      z-index:1;
+    }
+    #controls input {
+      flex:1; height:38px; padding:0 .8rem;
+      border:1px solid rgba(255,255,255,0.2);
+      border-radius:6px; background:var(--glass);
+      color:var(--text); font-size:14px;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    #controls input:focus {
+      outline:none;
+      border-color:var(--accent);
+      box-shadow:0 0 8px var(--accent);
+    }
+    #controls input::placeholder { color:rgba(255,255,255,0.4); }
+    #go-button {
+      height:38px; padding:0 1.2rem;
+      border:none; border-radius:6px;
+      background:linear-gradient(145deg, var(--accent-alt), var(--accent));
+      color:#000; font-weight:600; cursor:pointer;
+      box-shadow:0 4px 16px rgba(0,0,0,0.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    #go-button:hover {
+      transform:translateY(-2px);
+      box-shadow:0 6px 24px rgba(0,0,0,0.5);
+    }
+
+    /* Webview wrapper */
+    .webview-container {
+      flex:1;
+      margin:1rem;
+      border-radius:12px;
+      position:relative;
       overflow:hidden;
     }
+    .webview-container::before {
+      content:'';
+      position:absolute; inset:-2px;
+      background:linear-gradient(45deg, var(--accent-alt), var(--accent), var(--accent-alt));
+      background-size:300% 300%;
+      filter:blur(12px);
+      z-index:-1;
+      animation:neonBorder 6s ease infinite;
+    }
+    @keyframes neonBorder {
+      0%   { background-position:0% 50%; }
+      50%  { background-position:100% 50%; }
+      100% { background-position:0% 50%; }
+    }
+    .webview-container::after {
+      content:'';
+      position:absolute; inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(transparent 50%, rgba(255,255,255,0.05) 50%) 0 0 /4px 4px,
+        linear-gradient(90deg, transparent 50%, rgba(255,255,255,0.05) 50%) 0 0 /4px 4px;
+      animation:gridScroll 3s linear infinite;
+    }
+    @keyframes gridScroll {
+      to { background-position:4px 4px, 4px 4px; }
+    }
+    webview {
+      width:100%; height:100%; border:none;
+    }
 
-    /* ─── Decorative glow rings ─── */
-    body::before,body::after{
-      content:'';position:absolute;z-index:-1;border-radius:50%;
-      filter:blur(90px);opacity:.55;animation:float 14s ease-in-out infinite;
+    /* FAB */
+    #summarize-button {
+      position:fixed; bottom:24px; right:24px; z-index:2;
+      width:64px; height:64px; border-radius:50%;
+      border:3px solid var(--accent);
+      background:var(--accent-alt);
+      color:#000; font:700 28px/1 'Inter';
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 6px 20px rgba(0,0,0,0.4);
+      cursor:pointer;
+      transition: transform .2s, box-shadow .2s;
     }
-    body::before{width:400px;height:400px;background:#3b82f6;left:-120px;top:-80px;}
-    body::after {width:500px;height:500px;background:#9333ea;right:-140px;bottom:-120px;animation-delay:3s;}
+    #summarize-button:hover {
+      transform:scale(1.1);
+      box-shadow:0 8px 28px rgba(0,0,0,0.5);
+    }
 
-    @keyframes float{
-      0%{transform:translateY(0)}
-      50%{transform:translateY(-30px)}
-      100%{transform:translateY(0)}
+    /* Overlay */
+    #summarize-overlay {
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.8);
+      display:none; align-items:center; justify-content:center;
+      z-index:3;
+    }
+    #summarize-panel {
+      background:var(--bg-panel);
+      border:2px solid var(--accent);
+      border-radius:12px;
+      padding:24px;
+      width:90%; max-width:700px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.6);
+      display:flex; flex-direction:column; gap:16px;
+    }
+    #summarize-panel h3 {
+      margin:0; font-size:1.5rem; font-weight:600;
+      color:var(--accent);
+      text-shadow:0 0 6px var(--accent);
+    }
+    #summarize-panel textarea {
+      flex:1; resize:none;
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:8px; padding:12px;
+      background:var(--glass);
+      color:var(--text);
+      font-size:1rem; font-family:inherit;
+    }
+    #summarize-panel button {
+      padding:10px 20px; font-size:1rem; font-weight:600;
+      border-radius:8px; border:none; cursor:pointer;
+      transition: filter .2s, box-shadow .2s;
+    }
+    #do-summarize {
+      background:var(--accent); color:#000;
+      box-shadow:0 4px 12px rgba(0,0,0,0.4);
+    }
+    #do-summarize:hover {
+      filter:brightness(1.1);
+      box-shadow:0 6px 16px rgba(0,0,0,0.5);
+    }
+    #close-overlay {
+      background:transparent;
+      border:2px solid rgba(255,255,255,0.3);
+      color:var(--text);
+    }
+    #close-overlay:hover {
+      border-color:var(--accent);
+      color:var(--accent);
     }
 
-    /* ─── Top bar ─── */
-    #controls{
-      display:flex;align-items:center;gap:.6rem;
-      padding:.5rem .9rem;flex:0 0 54px;
-      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-      background:rgba(22,27,46,.55);
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-    #url-input{
-      flex:1;height:36px;border:none;border-radius:8px;
-      padding:0 .9rem;font-size:14px;background:rgba(255,255,255,.05);
-      color:var(--white);outline:none;
-    }
-    #url-input::placeholder{color:#8b94b5}
-    #url-input:focus{box-shadow:0 0 0 2px var(--accent)}
-
-    #go-button{
-      height:36px;padding:0 1.2rem;border:none;border-radius:8px;
-      background:var(--accent);color:#fff;font-weight:600;cursor:pointer;
-      transition:filter .2s;
-    }
-    #go-button:hover{filter:brightness(1.12)}
-
-    /* ─── Webview ─── */
-    #webview{flex:1;width:100%;height:100%;border:none;}
-
-    /* ─── Floating Action Button ─── */
-    #summarize-button{
-      position:fixed;bottom:22px;right:22px;
-      width:64px;height:64px;border-radius:50%;border:none;
-      background:linear-gradient(145deg,#ff9d4c,#ff6a26);
-      color:#fff;font:700 26px/1 Inter;cursor:pointer;
-      box-shadow:0 6px 18px rgba(0,0,0,.35);z-index:900;
-      display:flex;align-items:center;justify-content:center;
-      transition:transform .2s;
-    }
-    #summarize-button:hover{transform:scale(1.08)}
-
-    /* ─── Overlay ─── */
-    #summarize-overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,.55);
-      backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:800;
-    }
-    #summarize-panel{
-      width:90%;max-width:680px;background:var(--bg-2);border-radius:14px;
-      box-shadow:0 8px 24px rgba(0,0,0,.6);padding:28px 32px;display:flex;flex-direction:column;gap:14px;
-    }
-    #summarize-panel h3{font-size:1.45rem;font-weight:600;color:var(--accent-soft)}
-    #summarize-panel textarea{
-      width:100%;height:220px;border:1px solid rgba(255,255,255,.1);border-radius:10px;
-      resize:none;padding:10px;background:rgba(255,255,255,.04);color:var(--white);
-      font-family:inherit;font-size:.92rem;
-    }
-    #summarize-panel button{
-      padding:8px 18px;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;
-    }
-    #do-summarize{background:var(--accent);color:#fff}
-    #close-overlay{margin-left:10px;background:rgba(255,255,255,.12);color:var(--white)}
-    #close-overlay:hover{background:rgba(255,255,255,.22)}
-
-    /* ─── Small screens ─── */
-    @media(max-width:640px){
-      #controls{gap:.4rem;padding:.4rem .6rem}
-      #go-button{padding:0 .8rem}
+    /* Responsive */
+    @media (max-width:700px) {
+      #controls { flex-wrap:wrap; gap:.4rem; padding:.5rem; }
+      #go-button, #controls input { flex:1; }
+      .webview-container { margin:.5rem; }
+      #summarize-button { bottom:16px; right:16px; }
     }
   </style>
 </head>
-
 <body>
-  <!-- Top bar -->
   <div id="controls">
     <input id="url-input" type="text" placeholder="https://example.com" />
     <button id="go-button">Go</button>
   </div>
 
-  <!-- Browser view -->
-  <webview id="webview" src="https://www.example.com" preload="preload.js"></webview>
+  <div class="webview-container">
+    <webview id="webview" src="https://example.com" preload="preload.js"></webview>
+  </div>
 
-  <!-- Summarize FAB -->
   <button id="summarize-button" title="Summarize">S</button>
 
-  <!-- Summary overlay -->
   <div id="summarize-overlay">
     <div id="summarize-panel">
       <h3>Summarize Article</h3>
