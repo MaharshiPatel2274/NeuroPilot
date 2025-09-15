@@ -2,7 +2,6 @@
 
 NeuroPilot is a cross-platform productivity dashboard built with **Electron**, **HTML5**, **CSS3**, and **Vanilla JS**. It empowers users to visually organize and sort applications into contextual categories like `Relax` and `Work` via drag-and-drop interaction. Inspired by behavioral psychology and flow theory, it prioritizes digital wellness and zone-based task management.
 
-![NeuroPilot Screenshot](./assets/screenshot.png)
 
 ---
 
